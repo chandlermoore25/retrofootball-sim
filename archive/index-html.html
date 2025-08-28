@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro Football Simulator</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <!-- Main Application Container -->
+    <div id="app">
+        <!-- Header Section -->
+        <header id="game-header">
+            <div class="scoreboard">
+                <div class="team-score home">
+                    <span class="team-name">HOME</span>
+                    <span class="score">0</span>
+                </div>
+                <div class="game-info">
+                    <div class="quarter">Q1</div>
+                    <div class="time">15:00</div>
+                    <div class="down-distance">1st & 10</div>
+                </div>
+                <div class="team-score away">
+                    <span class="team-name">AWAY</span>
+                    <span class="score">0</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Game Canvas Container -->
+        <main id="game-container">
+            <div id="canvas-wrapper">
+                <!-- PixiJS canvas will be inserted here -->
+            </div>
+        </main>
+
+        <!-- Control Panel -->
+        <footer id="control-panel">
+            <div class="controls">
+                <button id="play-pause" class="control-btn">▶ Play</button>
+                <button id="speed-control" class="control-btn">1x Speed</button>
+                <button id="reset" class="control-btn">Reset</button>
+            </div>
+            <div class="mode-indicator">
+                <span>Mode: </span>
+                <span id="current-mode">PLAYGROUND</span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Load our main JavaScript file -->
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+retro-football-sim/
+├── index.html
+├── package.json
+├── vite.config.js
+├── /src
+│   ├── main.js (entry point)
+│   ├── /core
+│   │   ├── SimulationEngine.js
+│   │   └── FieldRenderer.js
+│   ├── /sprites
+│   │   └── PlayerSprite.js
+│   └── /assets
+│       └── (sprite sheets will go here)
+└── /public
+    └── style.css
