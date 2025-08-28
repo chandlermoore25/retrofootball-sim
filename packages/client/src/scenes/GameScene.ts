@@ -12,7 +12,7 @@ import { applyEvent } from '../state/applyEvent'
 import { BufferManager } from '../net/BufferManager'
 import { connectLive, DEFAULT_WS_URL, type LiveStatus } from '../net/ws'
 import { LocalDemoController } from '../sim/LocalDemoController'
-import { ConnectionBar } from '../ui/ConnectionBar'
+import { ConnectionBar, type Mode as BarMode } from '../ui/ConnectionBar'
 
 type Mode = 'LIVE' | 'DEMO' | 'REW'
 interface Opts { mode?: Mode }
@@ -50,7 +50,6 @@ export class GameScene implements IScene {
     this.root.addChild(this.banner.view)
     this.root.addChild(this.bar)
 
-    // move connection pill to top-right so it never overlaps HUD
     this.bar.position.set(window.innerWidth - 130, 10)
     this.bar.alpha = 0.8
 
@@ -62,7 +61,10 @@ export class GameScene implements IScene {
     this.onResize()
     this.syncHudAndMarkers()
     this.banner.show('Kickoff!', 1000)
-    this.bar.setMode(this.mode === 'LIVE' ? 'CONNECTING' : this.mode)
+
+    // Map scene mode to ConnectionBar mode (DEMO shares the REW style)
+    const pillMode: BarMode = this.mode === 'LIVE' ? 'CONNECTING' : 'REW'
+    this.bar.setMode(pillMode)
 
     this.loop.onUpdate = (dt) => {
       this.hud.tick(dt)
@@ -93,7 +95,10 @@ export class GameScene implements IScene {
     }
   }
 
-  private onLiveStatus(s: LiveStatus) { this.bar.setMode(s === 'LIVE' ? 'LIVE' : (s === 'CONNECTING' ? 'CONNECTING' : 'DISC')) }
+  private onLiveStatus(s: LiveStatus) {
+    const pill: BarMode = s === 'LIVE' ? 'LIVE' : (s === 'CONNECTING' ? 'CONNECTING' : 'DISC')
+    this.bar.setMode(pill)
+  }
 
   private onEvent(e: NormalizedEvent) {
     if (e.type === 'PlayStart') this.banner.show('Play start', 800)
